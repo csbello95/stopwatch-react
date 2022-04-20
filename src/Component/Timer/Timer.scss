@@ -1,0 +1,52 @@
+.timer-card {
+  border: 2px solid #ebebeb;
+  display: flex;
+  width: 25%;
+  flex-direction: column;
+  border-radius: 5px;
+  margin-bottom: 1rem;
+  h2 {
+    font-size: 1.5rem;
+    padding: 1rem 1rem 0 1rem;
+  }
+  .project {
+    color: #aeafb0;
+    padding: 0 1.2rem;
+  }
+  .timer {
+    width: 100%;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 600;
+    padding: 0.5rem;
+  }
+  .start {
+    padding: 0.5rem;
+    color: #91ddaa;
+    font-weight: 600;
+    background-color: white;
+    border: 2px solid #91ddaa;
+    border-radius: 2px;
+    cursor: pointer;
+  }
+  .stop {
+    padding: 0.5rem;
+    color: red;
+    font-weight: 600;
+    background-color: white;
+    border-radius: 2px;
+    border: 2px solid red;
+    cursor: pointer;
+  }
+  .timer-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5rem;
+    padding: 1rem;
+    button {
+      border: none;
+      background-color: white;
+      cursor: pointer;
+    }
+  }
+}

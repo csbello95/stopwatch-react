@@ -1,23 +1,69 @@
-import logo from './logo.svg';
-import './App.css';
-
+import Timer from "./Component/Timer";
+import "./App.scss";
+import AddTimer from "./Component/AddTimer";
+import EditTimer from "./Component/EditTimer";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { useRef, useState } from "react";
 function App() {
+  const [timerToEdit,setTimerToEdit] = useState(null);
+  const [timers, setTimers] = useState([
+    {
+      key: 1,
+      title: "title1",
+      project: "Proyecto",
+    },
+    {
+      key: 2,
+      title: "title2",
+      project: "proyecto2",
+    },
+  ]);
+
+  const deleteTimer = (key) => {
+    const timerstoUpload = timers.filter((timer) => timer.key !== key);
+    setTimers(timerstoUpload);
+  };
+
+  const editTimer = (timerToUpload) => {
+    const timerstoUpload = timers.map((timer) => {
+      if ((timer.key = timerToUpload.key)) return timerToUpload;
+      return timer;
+    });
+    setTimers(timerstoUpload);
+    setTimerToEdit(null);
+  };
+
+  const [showForm, setShowForm] = useState(false);
+
+  const addTimer = () => {
+    setShowForm(!showForm);
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+     {timerToEdit && <EditTimer timer={timerToEdit} editTimer={(timer) => editTimer(timer)}/>}
+      <h1>Cronometros</h1>
+      {timers.map((timer, i) => (
+        <Timer
+          timer={timer}
+          key={i}
+          deleteTimer={(title) => deleteTimer(title)}
+          setTimerToEdit = {()=>setTimerToEdit(timer)}
+        />
+      ))}
+      {showForm && (
+        <AddTimer
+          timers={timers}
+          setTimers={setTimers}
+          setShowForm={setShowForm}
+        />
+      )}
+      {!showForm && (
+        <button className="add-Timer" onClick={addTimer}>
+          <FontAwesomeIcon icon={faPlus} />
+        </button>
+      )}
     </div>
   );
 }
